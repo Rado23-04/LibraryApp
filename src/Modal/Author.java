@@ -5,14 +5,14 @@ import java.util.Objects;
 public class Author {
     private int id;
     private String name ;
-    private String last_name;
-    private String sexe;
+    private int birthday;
 
-    public Author(int id, String name, String last_name, String sexe) {
+
+    public Author(int id, String name, int birthday) {
         this.id = id;
         this.name = name;
-        this.last_name = last_name;
-        this.sexe = sexe;
+        this.birthday = birthday;
+
     }
 
     @Override
@@ -20,12 +20,12 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return id == author.id && Objects.equals(name, author.name) && Objects.equals(last_name, author.last_name) && Objects.equals(sexe, author.sexe);
+        return id == author.id && birthday == author.birthday && Objects.equals(name, author.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, last_name, sexe);
+        return Objects.hash(id, name, birthday);
     }
 
     public int getId() {
@@ -44,19 +44,11 @@ public class Author {
         this.name = name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public int getBirthday() {
+        return birthday;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getSexe() {
-        return sexe;
-    }
-
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
+    public void setBirthday(int birthday) {
+        this.birthday = birthday;
     }
 }
