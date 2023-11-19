@@ -9,7 +9,7 @@ import java.util.List;
 public class CrudOperationAuthor implements CrudOperation <Author> {
     private static Connection connection;
     public static void getConnection() {
-        ConnectionDatabase Db = new ConnectionDatabase();
+        ConnectionDatabase Db = new ConnectionDatabase("DB_URL","DB_USER","DB_PASSWORD");
         connection = Db.createConnection();
     }
     @Override

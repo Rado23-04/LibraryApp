@@ -13,7 +13,7 @@ import java.util.List;
 public class CrudOperationBook implements CrudOperation<Book>{
     private static Connection connection;
     public static void getConnection() {
-        ConnectionDatabase Db = new ConnectionDatabase();
+        ConnectionDatabase Db = new ConnectionDatabase("DB_URL","DB_USER","DB_PASSWORD");
         connection = Db.createConnection();
     }
 
@@ -53,7 +53,17 @@ public class CrudOperationBook implements CrudOperation<Book>{
     }
 
     @Override
-    public Book save(Book toSave) {
+    public Book save(Book book) {
+        getConnection();
+        try{
+            String sql = "INSERT INTO Author (name, birth_year) VALUES (?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,book.getNumberOfPages());
+            int row = statement.executeUpdate();
+            System.out.println("Add Author successfully !");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 

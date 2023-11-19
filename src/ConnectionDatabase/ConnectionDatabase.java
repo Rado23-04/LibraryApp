@@ -5,13 +5,23 @@ public class ConnectionDatabase {
     private  String user;
      private  String password;
 
+    public ConnectionDatabase(String jdbcUrl, String user, String password) {
+        this.jdbcUrl = jdbcUrl;
+        this.user = user;
+        this.password = password;
+    }
 
     public Connection createConnection(){
         try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.printf("JDBC URL: "+this.jdbcUrl);
+            System.out.println("User: " + this.user);
             return DriverManager.getConnection(
                     this.jdbcUrl, this.user, this.password
             );
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -28,7 +38,9 @@ public class ConnectionDatabase {
 
         System.out.println("JDBC URL: " + jdbcUrl);
 
-        try (Connection connection = DriverManager.getConnection(jdbcUrl, user, password)) {
+
+        ConnectionDatabase connectionDatabase = new ConnectionDatabase(jdbcUrl, user, password);
+        try (Connection connection = connectionDatabase.createConnection()) {
             System.out.println("Connexion réussie à la base de données.");
 
 
