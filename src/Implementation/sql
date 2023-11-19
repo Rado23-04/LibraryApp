@@ -1,0 +1,47 @@
+CREATE TABLE IF NOT EXISTS book ( --4
+    book_id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author_id INT REFERENCES author(author_id),
+    topic topic DEFAULT 'OTHER',
+    publication_year INT,
+    CONSTRAINT unique_title_author UNIQUE (title, author_id)
+);
+
+INSERT INTO book (title, author_id, topic, publication_year)
+VALUES
+    ('Book 1', 1, 'COMEDY', 2020),
+    ('Book 2', 2, 'ROMANCE', 2019),
+    ('Book 3', 3, 'OTHER', 2022);
+
+
+
+CREATE TABLE IF NOT EXISTS author (
+    author_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    birth_year INT
+);
+
+INSERT INTO author (name, birth_year)  --2
+VALUES
+    ('Author 1', 1980),
+    ('Author 2', 1975),
+    ('Author 3', 1990);
+
+
+
+CREATE TABLE IF NOT EXISTS subscriber (  --3
+    subscriber_id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subscription_date DATE DEFAULT CURRENT_DATE
+);
+
+INSERT INTO subscriber (username, password, email)
+VALUES
+    ('Subscriber1', 'password1', 'subscriber1@example.com'),
+    ('Subscriber2', 'password2', 'subscriber2@example.com'),
+    ('Subscriber3', 'password3', 'subscriber3@example.com');
+
+
+CREATE TYPE topic AS ENUM ('COMEDY', 'ROMANCE', 'OTHER'); --1
