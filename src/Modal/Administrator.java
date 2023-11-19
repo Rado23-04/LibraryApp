@@ -2,16 +2,18 @@ package Modal;
 
 import java.util.Objects;
 
-public class Administrator {
+public class Administrator extends User {
     private String role;
     private String userName;
     private String password;
 
-    public Administrator(String role, String userName, String password) {
+    public Administrator(int id, String name, String last_name, String email, String sexe,String role, String userName, String password) {
+        super(id, name, last_name, email, sexe);
         this.role = role;
         this.userName = userName;
         this.password = password;
     }
+
 
     public String getRole() {
         return role;
