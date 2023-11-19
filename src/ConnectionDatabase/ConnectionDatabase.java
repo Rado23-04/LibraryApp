@@ -11,13 +11,11 @@ public class ConnectionDatabase {
             return;
         }
 
-        // Vérifiez l'URL JDBC avant d'établir la connexion
         System.out.println("JDBC URL: " + jdbcUrl);
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, user, password)) {
             System.out.println("Connexion réussie à la base de données.");
 
-            // Effectuez d'autres opérations avec la base de données ici
 
         } catch (SQLException e) {
             e.printStackTrace();
