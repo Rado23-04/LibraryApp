@@ -42,10 +42,9 @@ public class CrudOperationAuthor implements CrudOperation <Author> {
         getConnection();
         try {
             for (Author authors:author){
-                String sql = "INSERT INTO Author (name, first_name, sex) VALUES (?,?,?)";
+                String sql = "INSERT INTO Author (name, birth_year) VALUES (?,?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setInt(1,authors.getId());
-                statement.setString(2,authors.getName());
+                statement.setString(1,authors.getName());
                 statement.setInt(2,authors.getBirthday());
                 int row = statement.executeUpdate();
             }
